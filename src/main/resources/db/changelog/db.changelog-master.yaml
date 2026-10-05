@@ -13,3 +13,10 @@ databaseChangeLog:
         - sqlFile:
             path: 002-seed.sql
             relativeToChangelogFile: true
+  - changeSet:
+      id: 003-demo-players
+      author: lab
+      changes:
+        - sqlFile:
+            path: 003-demo-players.sql
+            relativeToChangelogFile: true
