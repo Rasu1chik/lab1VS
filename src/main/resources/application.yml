@@ -1,0 +1,19 @@
+server:
+  port: ${SERVER_PORT:8080}
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:fantasy}
+    username: ${DB_USER:fantasy}
+    password: ${DB_PASSWORD:fantasy}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+game:
+  initial-budget: ${GAME_INITIAL_BUDGET:100.0}
+  max-players-per-club: ${GAME_MAX_PLAYERS_PER_CLUB:3}
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: ${DB_NAME:-fantasy}
+      POSTGRES_USER: ${DB_USER:-fantasy}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-fantasy}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-fantasy} -d ${DB_NAME:-fantasy}"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME:-fantasy}
+      DB_USER: ${DB_USER:-fantasy}
+      DB_PASSWORD: ${DB_PASSWORD:-fantasy}
+      SERVER_PORT: 8080
+      GAME_INITIAL_BUDGET: ${GAME_INITIAL_BUDGET:-100.0}
+      GAME_MAX_PLAYERS_PER_CLUB: ${GAME_MAX_PLAYERS_PER_CLUB:-3}
+    ports:
+      - "${APP_PORT:-8080}:8080"
+volumes:
+  pgdata:
