@@ -175,6 +175,33 @@ class FantasyApiIntegrationTest {
                 .isEqualTo("GK");
     }
 
+    @Test
+    void finishingScoresTeamsBeyondFirstPage() throws Exception {
+        String suffix = UUID.randomUUID().toString().substring(0, 8);
+        var manager = createJson("/api/v1/managers", new ManagerInput("batch" + suffix,
+                suffix + "@mail.test"), ManagerView.class);
+        var roster = createRoster(suffix);
+        List<Long> ids = roster.stream().map(Player::getId).toList();
+        Long lastTeamId = null;
+        for (int i = 0; i < 51; i++) {
+            var team = createJson("/api/v1/fantasy-teams", new TeamInput(manager.id(),
+                    "Team " + i, ids, ids.subList(0, 11), ids.get(0)), TeamView.class);
+            lastTeamId = team.id();
+        }
+        mvc.perform(get("/api/v1/fantasy-teams?managerId=" + manager.id() + "&size=50"))
+                .andExpect(status().isOk()).andExpect(header().string("X-Total-Count", "51"))
+                .andExpect(jsonPath("$.length()").value(50));
+        var week = createJson("/api/v1/gameweeks", new GameweekInput(1000 + new Random().nextInt(100000),
+                Instant.parse("2030-10-01T12:00:00Z")), GameweekView.class);
+        mvc.perform(post("/api/v1/gameweeks/" + week.id() + "/start")).andExpect(status().isOk());
+        mvc.perform(put("/api/v1/gameweeks/" + week.id() + "/performances")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json.writeValueAsBytes(new PerformanceInput(ids.get(0), 90, 0, 0, false, 0, 0))))
+                .andExpect(status().isOk());
+        mvc.perform(post("/api/v1/gameweeks/" + week.id() + "/finish")).andExpect(status().isOk());
+        assertThat(teams.findById(lastTeamId).orElseThrow().getTotalPoints()).isEqualTo(4);
+    }
+
     private List<Player> createRoster(String suffix) {
         var clubList = clubs.findAll().stream().limit(5).toList();
         Position[] positions = {Position.GK,Position.GK,Position.DEF,Position.DEF,Position.DEF,
