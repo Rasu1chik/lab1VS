@@ -103,12 +103,17 @@ public class GameweekService {
         }
         Map<Long, Integer> pointsByPlayer = results.stream().collect(Collectors.toMap(
                 result -> result.getPlayer().getId(), PlayerPerformance::getPoints));
-        for (FantasyTeam team : teams.findAll()) {
-            int earned = team.getSquad().stream().filter(SquadPlayer::isStarter)
-                    .mapToInt(item -> pointsByPlayer.getOrDefault(item.getPlayer().getId(), 0)
-                            * (item.isCaptain() ? 2 : 1)).sum();
-            team.setTotalPoints(team.getTotalPoints() + earned);
-        }
+        int pageNumber = 0;
+        Page<FantasyTeam> batch;
+        do {
+            batch = teams.findAll(PageRequest.of(pageNumber++, 50, Sort.by("id")));
+            for (FantasyTeam team : batch) {
+                int earned = team.getSquad().stream().filter(SquadPlayer::isStarter)
+                        .mapToInt(item -> pointsByPlayer.getOrDefault(item.getPlayer().getId(), 0)
+                                * (item.isCaptain() ? 2 : 1)).sum();
+                team.setTotalPoints(team.getTotalPoints() + earned);
+            }
+        } while (batch.hasNext());
         week.setStatus(GameweekStatus.FINISHED);
         return Views.gameweek(week);
     }
