@@ -17,8 +17,17 @@ docker compose up --build
 Swagger UI: <http://localhost:8080/swagger-ui.html>, OpenAPI JSON:
 <http://localhost:8080/v3/api-docs>. Базовый путь API: `/api/v1`.
 PostgreSQL и схема поднимаются автоматически; Liquibase применяет миграции при
-старте. В начальных данных есть шесть клубов, 15 учебных игроков для первого
-состава и предстоящий тур. Своих игроков можно добавить через Swagger.
+старте. В начальных данных есть шесть клубов, 15 реальных футболистов для первого
+состава и предстоящий тур. Цены игроков заданы для учебного примера, это не
+актуальные цены трансферного рынка. Своих игроков можно добавить через Swagger.
+
+Имена и позиции стартовых игроков сверены по официальным страницам
+[Arsenal](https://www.arsenal.com/men/players/k) и
+[сообщению клуба о Кепе Аррисабалаге](https://www.arsenal.com/news/transfer-windows-confirmed-for-202627-season-aKDa80B8CnMD),
+[Liverpool](https://www.liverpoolfc.com/news/fantasy-premier-league-liverpool-player-prices-2026-27-revealed),
+[Chelsea](https://www.chelseafc.com/en/teams/men),
+[Manchester City](https://www.mancity.com/news/mens/man-city-fpl-prices-2026-27-revealed-haaland-rodri-foden-63920330) и
+[Newcastle](https://www.newcastleunited.com/en/teams/mens-team).
 
 Переменные среды в `compose.yaml`: `DB_NAME`, `DB_USER`, `DB_PASSWORD`,
 `APP_PORT`, `GAME_INITIAL_BUDGET`, `GAME_MAX_PLAYERS_PER_CLUB`. При запуске вне
