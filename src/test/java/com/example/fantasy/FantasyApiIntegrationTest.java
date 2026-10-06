@@ -42,6 +42,20 @@ class FantasyApiIntegrationTest {
     @Autowired JdbcTemplate jdbc;
 
     @Test
+    void seededPlayersHaveRealFullNames() {
+        var names = players.findAll(org.springframework.data.domain.PageRequest.of(0, 15,
+                        org.springframework.data.domain.Sort.by("id"))).stream()
+                .map(player -> player.getFirstName() + " " + player.getLastName())
+                .collect(java.util.stream.Collectors.toSet());
+        assertThat(names).containsExactlyInAnyOrder(
+                "David Raya", "Kepa Arrizabalaga", "William Saliba",
+                "Virgil van Dijk", "Joe Gomez", "Jeremie Frimpong",
+                "Levi Colwill", "Enzo Fernandez", "Moises Caicedo",
+                "Phil Foden", "Rayan Cherki", "Tijjani Reijnders",
+                "Yoane Wissa", "William Osula", "Harvey Barnes");
+    }
+
+    @Test
     void catalogCrudValidationAndPagination() throws Exception {
         String suffix = UUID.randomUUID().toString().substring(0, 8);
         var manager = createJson("/api/v1/managers", new ManagerInput("manager" + suffix, suffix + "@mail.test"), ManagerView.class);
