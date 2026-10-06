@@ -20,3 +20,10 @@ databaseChangeLog:
         - sqlFile:
             path: 003-demo-players.sql
             relativeToChangelogFile: true
+  - changeSet:
+      id: 004-real-player-names
+      author: lab
+      changes:
+        - sqlFile:
+            path: 004-real-player-names.sql
+            relativeToChangelogFile: true
