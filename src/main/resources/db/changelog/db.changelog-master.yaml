@@ -27,3 +27,10 @@ databaseChangeLog:
         - sqlFile:
             path: 004-real-player-names.sql
             relativeToChangelogFile: true
+  - changeSet:
+      id: 005-full-fpl-catalog
+      author: lab
+      changes:
+        - sqlFile:
+            path: 005-full-fpl-catalog.sql
+            relativeToChangelogFile: true
