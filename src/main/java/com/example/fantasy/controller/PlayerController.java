@@ -29,9 +29,10 @@ public class PlayerController {
     public ScrollView<PlayerView> list(@RequestParam(required = false) Position position,
                                        @RequestParam(required = false) Long clubId,
                                        @RequestParam(required = false) BigDecimal maxPrice,
+                                       @RequestParam(required = false) String name,
                                        @RequestParam(defaultValue = "0") int page,
                                        @RequestParam(defaultValue = "20") int size) {
-        return service.players(position, clubId, maxPrice, HttpPages.page(page, size));
+        return service.players(position, clubId, maxPrice, name, HttpPages.page(page, size));
     }
     @PutMapping("/{id}") @Operation(summary = "Обновить игрока")
     public PlayerView update(@PathVariable Long id, @Valid @RequestBody PlayerInput input) {
