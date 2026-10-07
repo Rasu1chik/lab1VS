@@ -26,7 +26,7 @@ public class Player {
     @NotNull @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private PlayerStatus status;
-    @NotNull @DecimalMin("4.0") @DecimalMax("15.0")
+    @NotNull @DecimalMin("3.0") @DecimalMax("25.0")
     @Column(nullable = false, precision = 4, scale = 1)
     private BigDecimal price;
     @Column(nullable = false)
