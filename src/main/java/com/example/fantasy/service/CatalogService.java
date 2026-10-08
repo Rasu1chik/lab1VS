@@ -100,8 +100,9 @@ public class CatalogService {
     @Transactional(readOnly = true)
     public PlayerView getPlayer(Long id) { return Views.player(player(id)); }
     @Transactional(readOnly = true)
-    public ScrollView<PlayerView> players(Position position, Long clubId, BigDecimal maxPrice, Pageable pageable) {
-        Slice<PlayerView> slice = players.search(position, clubId, maxPrice, pageable).map(Views::player);
+    public ScrollView<PlayerView> players(Position position, Long clubId, BigDecimal maxPrice, String name, Pageable pageable) {
+        Slice<PlayerView> slice = players.search(position, clubId, maxPrice,
+                name == null || name.isBlank() ? null : name.trim(), pageable).map(Views::player);
         return new ScrollView<>(slice.getContent(), slice.getNumber(), slice.getSize(), slice.hasNext());
     }
 }
