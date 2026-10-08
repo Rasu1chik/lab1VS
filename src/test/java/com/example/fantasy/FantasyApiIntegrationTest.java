@@ -42,15 +42,24 @@ class FantasyApiIntegrationTest {
     @Autowired JdbcTemplate jdbc;
 
     @Test
-    void seededPlayersHaveRealFullNames() {
+    void fullSeasonCatalogIsLoadedWithoutLosingOriginalPlayerIds() throws Exception {
+        assertThat(clubs.count()).isGreaterThanOrEqualTo(20);
+        assertThat(players.count()).isGreaterThanOrEqualTo(667);
+        assertThat(jdbc.queryForObject("select count(distinct fpl_id) from players", Integer.class)).isEqualTo(667);
+        assertThat(jdbc.queryForObject("select price from players where fpl_id = 411", BigDecimal.class))
+                .isEqualByComparingTo("15.6");
+        mvc.perform(get("/api/v1/players?name=haaland&size=10"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content[0].firstName").value("Erling"))
+                .andExpect(jsonPath("$.content[0].lastName").value("Haaland"));
         var names = players.findAll(org.springframework.data.domain.PageRequest.of(0, 15,
                         org.springframework.data.domain.Sort.by("id"))).stream()
                 .map(player -> player.getFirstName() + " " + player.getLastName())
                 .collect(java.util.stream.Collectors.toSet());
         assertThat(names).containsExactlyInAnyOrder(
-                "David Raya", "Kepa Arrizabalaga", "William Saliba",
+                "David Raya Martín", "Kepa Arrizabalaga Revuelta", "William Saliba",
                 "Virgil van Dijk", "Joe Gomez", "Jeremie Frimpong",
-                "Levi Colwill", "Enzo Fernandez", "Moises Caicedo",
+                "Levi Samuels Colwill", "Enzo Fernández", "Moisés Caicedo Corozo",
                 "Phil Foden", "Rayan Cherki", "Tijjani Reijnders",
                 "Yoane Wissa", "William Osula", "Harvey Barnes");
     }
