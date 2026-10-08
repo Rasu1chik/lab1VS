@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.*;
 
 public interface PlayerRepository extends JpaRepository<Player, Long> {
     @Query("select p from Player p where (:position is null or p.position = :position) " +
-            "and (:clubId is null or p.club.id = :clubId) and (:maxPrice is null or p.price <= :maxPrice)")
-    Slice<Player> search(Position position, Long clubId, BigDecimal maxPrice, Pageable pageable);
+            "and (:clubId is null or p.club.id = :clubId) and (:maxPrice is null or p.price <= :maxPrice) " +
+            "and (:name is null or lower(concat(p.firstName, ' ', p.lastName)) like lower(concat('%', cast(:name as string), '%'))) " +
+            "order by p.id")
+    Slice<Player> search(Position position, Long clubId, BigDecimal maxPrice, String name, Pageable pageable);
 }

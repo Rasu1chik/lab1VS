@@ -18,7 +18,7 @@ public final class ApiDto {
     public record PlayerInput(@NotNull Long clubId, @NotBlank @Size(max = 50) String firstName,
                               @NotBlank @Size(max = 50) String lastName,
                               @NotNull Position position, @NotNull PlayerStatus status,
-                              @NotNull @DecimalMin("4.0") @DecimalMax("15.0") BigDecimal price) {}
+                              @NotNull @DecimalMin("3.0") @DecimalMax("25.0") BigDecimal price) {}
     public record PlayerView(Long id, Long clubId, String firstName, String lastName,
                              Position position, PlayerStatus status, BigDecimal price, int totalPoints) {}
     public record TeamInput(@NotNull Long managerId, @NotBlank @Size(max = 50) String name,
