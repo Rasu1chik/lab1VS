@@ -5,9 +5,12 @@ import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "players")
+@Getter @Setter
 public class Player {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,20 +34,4 @@ public class Player {
     private BigDecimal price;
     @Column(nullable = false)
     private int totalPoints;
-
-    public Long getId() { return id; }
-    public RealClub getClub() { return club; }
-    public void setClub(RealClub club) { this.club = club; }
-    public String getFirstName() { return firstName; }
-    public void setFirstName(String firstName) { this.firstName = firstName; }
-    public String getLastName() { return lastName; }
-    public void setLastName(String lastName) { this.lastName = lastName; }
-    public Position getPosition() { return position; }
-    public void setPosition(Position position) { this.position = position; }
-    public PlayerStatus getStatus() { return status; }
-    public void setStatus(PlayerStatus status) { this.status = status; }
-    public BigDecimal getPrice() { return price; }
-    public void setPrice(BigDecimal price) { this.price = price; }
-    public int getTotalPoints() { return totalPoints; }
-    public void setTotalPoints(int totalPoints) { this.totalPoints = totalPoints; }
 }

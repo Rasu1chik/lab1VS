@@ -5,9 +5,12 @@ import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "transfers")
+@Getter @Setter
 public class Transfer {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,20 +32,4 @@ public class Transfer {
     private BigDecimal priceOut;
     @Column(nullable = false)
     private Instant createdAt;
-
-    public Long getId() { return id; }
-    public FantasyTeam getTeam() { return team; }
-    public void setTeam(FantasyTeam team) { this.team = team; }
-    public Gameweek getGameweek() { return gameweek; }
-    public void setGameweek(Gameweek gameweek) { this.gameweek = gameweek; }
-    public Player getPlayerIn() { return playerIn; }
-    public void setPlayerIn(Player playerIn) { this.playerIn = playerIn; }
-    public Player getPlayerOut() { return playerOut; }
-    public void setPlayerOut(Player playerOut) { this.playerOut = playerOut; }
-    public BigDecimal getPriceIn() { return priceIn; }
-    public void setPriceIn(BigDecimal priceIn) { this.priceIn = priceIn; }
-    public BigDecimal getPriceOut() { return priceOut; }
-    public void setPriceOut(BigDecimal priceOut) { this.priceOut = priceOut; }
-    public Instant getCreatedAt() { return createdAt; }
-    public void setCreatedAt(Instant createdAt) { this.createdAt = createdAt; }
 }

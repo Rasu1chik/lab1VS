@@ -10,6 +10,5 @@ import org.springframework.data.jpa.repository.*;
 public interface FantasyTeamRepository extends JpaRepository<FantasyTeam, Long> {
     Page<FantasyTeam> findByManagerId(Long managerId, Pageable pageable);
     @Lock(LockModeType.OPTIMISTIC_FORCE_INCREMENT)
-    @Query("select t from FantasyTeam t where t.id = :id")
-    Optional<FantasyTeam> findForTransfer(Long id);
+    Optional<FantasyTeam> findWithLockById(Long id);
 }

@@ -5,9 +5,12 @@ import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "player_performances")
+@Getter @Setter
 public class PlayerPerformance {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,24 +34,4 @@ public class PlayerPerformance {
     private int redCards;
     @Column(nullable = false)
     private int points;
-
-    public Long getId() { return id; }
-    public Player getPlayer() { return player; }
-    public void setPlayer(Player player) { this.player = player; }
-    public Gameweek getGameweek() { return gameweek; }
-    public void setGameweek(Gameweek gameweek) { this.gameweek = gameweek; }
-    public int getMinutesPlayed() { return minutesPlayed; }
-    public void setMinutesPlayed(int minutesPlayed) { this.minutesPlayed = minutesPlayed; }
-    public int getGoals() { return goals; }
-    public void setGoals(int goals) { this.goals = goals; }
-    public int getAssists() { return assists; }
-    public void setAssists(int assists) { this.assists = assists; }
-    public boolean isCleanSheet() { return cleanSheet; }
-    public void setCleanSheet(boolean cleanSheet) { this.cleanSheet = cleanSheet; }
-    public int getYellowCards() { return yellowCards; }
-    public void setYellowCards(int yellowCards) { this.yellowCards = yellowCards; }
-    public int getRedCards() { return redCards; }
-    public void setRedCards(int redCards) { this.redCards = redCards; }
-    public int getPoints() { return points; }
-    public void setPoints(int points) { this.points = points; }
 }

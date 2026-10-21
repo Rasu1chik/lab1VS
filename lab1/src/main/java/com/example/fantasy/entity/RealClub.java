@@ -5,9 +5,12 @@ import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "real_clubs")
+@Getter @Setter
 public class RealClub {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,12 +25,4 @@ public class RealClub {
     private String country;
     @OneToMany(mappedBy = "club")
     private List<Player> players = new ArrayList<>();
-
-    public Long getId() { return id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public String getShortName() { return shortName; }
-    public void setShortName(String shortName) { this.shortName = shortName; }
-    public String getCountry() { return country; }
-    public void setCountry(String country) { this.country = country; }
 }

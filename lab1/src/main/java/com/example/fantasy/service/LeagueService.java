@@ -5,22 +5,18 @@ import com.example.fantasy.entity.*;
 import com.example.fantasy.exception.ApiException;
 import com.example.fantasy.repository.*;
 import java.util.Comparator;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class LeagueService {
     private final LeagueRepository leagues;
     private final ManagerRepository managers;
     private final FantasyTeamRepository teams;
-
-    public LeagueService(LeagueRepository leagues, ManagerRepository managers, FantasyTeamRepository teams) {
-        this.leagues = leagues;
-        this.managers = managers;
-        this.teams = teams;
-    }
 
     private League league(Long id) {
         return leagues.findById(id).orElseThrow(() -> ApiException.missing("Лига"));

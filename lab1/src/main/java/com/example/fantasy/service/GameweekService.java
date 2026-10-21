@@ -7,28 +7,20 @@ import com.example.fantasy.repository.*;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class GameweekService {
     private final GameweekRepository gameweeks;
     private final PlayerRepository players;
     private final PlayerPerformanceRepository performances;
     private final FantasyTeamRepository teams;
     private final PointsCalculator calculator;
-
-    public GameweekService(GameweekRepository gameweeks, PlayerRepository players,
-                           PlayerPerformanceRepository performances, FantasyTeamRepository teams,
-                           PointsCalculator calculator) {
-        this.gameweeks = gameweeks;
-        this.players = players;
-        this.performances = performances;
-        this.teams = teams;
-        this.calculator = calculator;
-    }
 
     private Gameweek week(Long id) {
         return gameweeks.findById(id).orElseThrow(() -> ApiException.missing("Тур"));
@@ -63,7 +55,7 @@ public class GameweekService {
     }
 
     public GameweekView start(Long id) {
-        Gameweek week = gameweeks.findLockedById(id).orElseThrow(() -> ApiException.missing("Тур"));
+        Gameweek week = gameweeks.findWithLockById(id).orElseThrow(() -> ApiException.missing("Тур"));
         if (week.getStatus() != GameweekStatus.UPCOMING) throw ApiException.conflict("Тур уже начат");
         week.setStatus(GameweekStatus.ACTIVE);
         return Views.gameweek(week);
@@ -93,7 +85,7 @@ public class GameweekService {
     }
 
     public GameweekView finish(Long id) {
-        Gameweek week = gameweeks.findLockedById(id).orElseThrow(() -> ApiException.missing("Тур"));
+        Gameweek week = gameweeks.findWithLockById(id).orElseThrow(() -> ApiException.missing("Тур"));
         if (week.getStatus() != GameweekStatus.ACTIVE) throw ApiException.conflict("Закрыть можно только активный тур");
         var results = performances.findByGameweekId(id);
         for (PlayerPerformance result : results) {

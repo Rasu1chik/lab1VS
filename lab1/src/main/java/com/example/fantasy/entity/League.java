@@ -5,9 +5,12 @@ import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "leagues")
+@Getter @Setter
 public class League {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,15 +28,4 @@ public class League {
     @ManyToMany
     @JoinTable(name = "league_teams", joinColumns = @JoinColumn(name = "league_id"), inverseJoinColumns = @JoinColumn(name = "fantasy_team_id"))
     private Set<FantasyTeam> teams = new HashSet<>();
-
-    public Long getId() { return id; }
-    public Manager getOwner() { return owner; }
-    public void setOwner(Manager owner) { this.owner = owner; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public LeagueType getType() { return type; }
-    public void setType(LeagueType type) { this.type = type; }
-    public String getJoinCode() { return joinCode; }
-    public void setJoinCode(String joinCode) { this.joinCode = joinCode; }
-    public Set<FantasyTeam> getTeams() { return teams; }
 }

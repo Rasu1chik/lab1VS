@@ -11,6 +11,8 @@ spring:
     open-in-view: false
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
+api:
+  base-path: /api/v1
 game:
   initial-budget: ${GAME_INITIAL_BUDGET:100.0}
   max-players-per-club: ${GAME_MAX_PLAYERS_PER_CLUB:3}

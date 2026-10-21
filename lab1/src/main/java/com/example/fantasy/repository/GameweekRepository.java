@@ -11,6 +11,5 @@ public interface GameweekRepository extends JpaRepository<Gameweek, Long> {
     Optional<Gameweek> findFirstByStatusOrderByNumberAsc(GameweekStatus status);
     Optional<Gameweek> findFirstByStatusNotOrderByNumberAsc(GameweekStatus status);
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @Query("select g from Gameweek g where g.id = :id")
-    Optional<Gameweek> findLockedById(Long id);
+    Optional<Gameweek> findWithLockById(Long id);
 }

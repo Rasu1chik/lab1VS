@@ -5,9 +5,12 @@ import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "gameweeks")
+@Getter @Setter
 public class Gameweek {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,12 +21,4 @@ public class Gameweek {
     @NotNull @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private GameweekStatus status;
-
-    public Long getId() { return id; }
-    public int getNumber() { return number; }
-    public void setNumber(int number) { this.number = number; }
-    public Instant getDeadline() { return deadline; }
-    public void setDeadline(Instant deadline) { this.deadline = deadline; }
-    public GameweekStatus getStatus() { return status; }
-    public void setStatus(GameweekStatus status) { this.status = status; }
 }

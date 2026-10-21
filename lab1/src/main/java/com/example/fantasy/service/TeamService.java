@@ -8,12 +8,14 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class TeamService {
     private final FantasyTeamRepository teams;
     private final PlayerRepository players;
@@ -21,16 +23,6 @@ public class TeamService {
     private final GameweekRepository gameweeks;
     private final TransferRepository transfers;
     private final SquadValidator validator;
-
-    public TeamService(FantasyTeamRepository teams, PlayerRepository players, ManagerRepository managers,
-                       GameweekRepository gameweeks, TransferRepository transfers, SquadValidator validator) {
-        this.teams = teams;
-        this.players = players;
-        this.managers = managers;
-        this.gameweeks = gameweeks;
-        this.transfers = transfers;
-        this.validator = validator;
-    }
 
     private FantasyTeam team(Long id) {
         return teams.findById(id).orElseThrow(() -> ApiException.missing("Команда"));
@@ -89,7 +81,7 @@ public class TeamService {
     public void delete(Long id) { teams.delete(team(id)); teams.flush(); }
 
     public TransferView transfer(Long id, TransferInput input) {
-        FantasyTeam team = teams.findForTransfer(id).orElseThrow(() -> ApiException.missing("Команда"));
+        FantasyTeam team = teams.findWithLockById(id).orElseThrow(() -> ApiException.missing("Команда"));
         Gameweek week = gameweeks.findFirstByStatusNotOrderByNumberAsc(GameweekStatus.FINISHED)
                 .orElseThrow(() -> ApiException.rule("Нет предстоящего тура для трансфера"));
         if (week.getStatus() != GameweekStatus.UPCOMING || !Instant.now().isBefore(week.getDeadline())) {

@@ -5,9 +5,12 @@ import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "squad_players")
+@Getter @Setter
 public class SquadPlayer {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,18 +28,4 @@ public class SquadPlayer {
     private boolean starter;
     @Column(nullable = false)
     private Instant addedAt;
-
-    public Long getId() { return id; }
-    public FantasyTeam getTeam() { return team; }
-    public void setTeam(FantasyTeam team) { this.team = team; }
-    public Player getPlayer() { return player; }
-    public void setPlayer(Player player) { this.player = player; }
-    public BigDecimal getPurchasePrice() { return purchasePrice; }
-    public void setPurchasePrice(BigDecimal purchasePrice) { this.purchasePrice = purchasePrice; }
-    public boolean isCaptain() { return captain; }
-    public void setCaptain(boolean captain) { this.captain = captain; }
-    public boolean isStarter() { return starter; }
-    public void setStarter(boolean starter) { this.starter = starter; }
-    public Instant getAddedAt() { return addedAt; }
-    public void setAddedAt(Instant addedAt) { this.addedAt = addedAt; }
 }
