@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
+import com.example.managerservice.client.FantasyClient;
 @RestController
 @RequestMapping("/api/v1/managers")
 public class ManagerController {
  public record Input(@NotBlank @Size(max=50) String username,@NotBlank @Email @Size(max=255) String email) {}
  private final ManagerRepository repository;
- public ManagerController(ManagerRepository repository) {this.repository=repository;}
+ private final FantasyClient fantasy;
+ public ManagerController(ManagerRepository repository,FantasyClient fantasy) {this.repository=repository;this.fantasy=fantasy;}
  private Mono<Manager> require(Long id) {return repository.findById(id).switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND,"Менеджер не найден")));}
  @PostMapping
  public Mono<ResponseEntity<Manager>> create(@Valid @RequestBody Input input) {
@@ -31,6 +33,8 @@ public class ManagerController {
   return require(id).flatMap(m->repository.save(new Manager(m.id(),input.username(),input.email(),m.createdAt())));
  }
  @DeleteMapping("/{id}") public Mono<ResponseEntity<Void>> delete(@PathVariable Long id) {
-  return require(id).flatMap(m->repository.deleteById(id)).thenReturn(ResponseEntity.noContent().build());
+  return require(id).flatMap(m->Mono.fromCallable(()->fantasy.references(id)).subscribeOn(Schedulers.boundedElastic()))
+    .flatMap(used->used ? Mono.<Void>error(new ResponseStatusException(HttpStatus.CONFLICT,"У менеджера есть команды или лиги")) : repository.deleteById(id))
+    .thenReturn(ResponseEntity.noContent().build());
  }
 }

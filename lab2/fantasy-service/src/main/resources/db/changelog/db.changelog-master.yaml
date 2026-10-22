@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-schema
+      author: lab
+      changes:
+        - sqlFile:
+            path: 001-schema.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 002-seed
+      author: lab
+      changes:
+        - sqlFile:
+            path: 002-seed.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 003-demo-players
+      author: lab
+      changes:
+        - sqlFile:
+            path: 003-demo-players.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 004-real-player-names
+      author: lab
+      changes:
+        - sqlFile:
+            path: 004-real-player-names.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 005-full-fpl-catalog
+      author: lab
+      changes:
+        - sqlFile:
+            path: 005-full-fpl-catalog.sql
+            relativeToChangelogFile: true
