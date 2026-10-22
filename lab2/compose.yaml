@@ -1,0 +1,130 @@
+name: fantasy-lab2
+x-app: &app
+  restart: on-failure
+  environment: &env
+    CONFIG_SERVER_URL: http://config-server:8888
+    EUREKA_URL: http://discovery-server:8761/eureka/
+  healthcheck: &health
+    test: ["CMD", "curl", "-fsS", "http://localhost:8080/actuator/health"]
+    interval: 5s
+    timeout: 4s
+    retries: 40
+    start_period: 40s
+services:
+  manager-db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: managers
+      POSTGRES_USER: fantasy
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-fantasy}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fantasy -d managers"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    volumes:
+      - manager-db-data:/var/lib/postgresql/data
+  fantasy-db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: fantasy
+      POSTGRES_USER: fantasy
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-fantasy}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fantasy -d fantasy"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    volumes:
+      - fantasy-db-data:/var/lib/postgresql/data
+  config-server:
+    <<: *app
+    build:
+      context: .
+      args:
+        MODULE: config-server
+    environment:
+      <<: *env
+      CONFIG_REPO: file:/config-repo
+    ports:
+      - "127.0.0.1:8888:8888"
+    healthcheck:
+      <<: *health
+      test: ["CMD", "curl", "-fsS", "http://localhost:8888/actuator/health"]
+  discovery-server:
+    <<: *app
+    build:
+      context: .
+      args:
+        MODULE: discovery-server
+    depends_on:
+      config-server:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8761:8761"
+    healthcheck:
+      <<: *health
+      test: ["CMD", "curl", "-fsS", "http://localhost:8761/actuator/health"]
+  manager-service:
+    <<: *app
+    build:
+      context: .
+      args:
+        MODULE: manager-service
+    depends_on:
+      config-server:
+        condition: service_healthy
+      discovery-server:
+        condition: service_healthy
+      manager-db:
+        condition: service_healthy
+    environment:
+      <<: *env
+      MANAGER_DB_HOST: manager-db
+      DB_PASSWORD: ${DB_PASSWORD:-fantasy}
+    healthcheck:
+      <<: *health
+      test: ["CMD", "curl", "-fsS", "http://localhost:8081/actuator/health"]
+  fantasy-service:
+    <<: *app
+    build:
+      context: .
+      args:
+        MODULE: fantasy-service
+    depends_on:
+      config-server:
+        condition: service_healthy
+      discovery-server:
+        condition: service_healthy
+      fantasy-db:
+        condition: service_healthy
+    environment:
+      <<: *env
+      FANTASY_DB_HOST: fantasy-db
+      DB_PASSWORD: ${DB_PASSWORD:-fantasy}
+    healthcheck:
+      <<: *health
+      test: ["CMD", "curl", "-fsS", "http://localhost:8082/actuator/health"]
+  api-gateway:
+    <<: *app
+    build:
+      context: .
+      args:
+        MODULE: api-gateway
+    depends_on:
+      config-server:
+        condition: service_healthy
+      discovery-server:
+        condition: service_healthy
+      manager-service:
+        condition: service_healthy
+      fantasy-service:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8080:8080"
+    healthcheck:
+      <<: *health
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/actuator/health"]
+volumes:
+  manager-db-data:
+  fantasy-db-data:

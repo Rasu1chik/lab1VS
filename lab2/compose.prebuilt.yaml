@@ -1,0 +1,17 @@
+# Optional: package with mvn verify first, then build images without recompiling.
+services:
+  config-server:
+    build:
+      dockerfile: Dockerfile.runtime
+  discovery-server:
+    build:
+      dockerfile: Dockerfile.runtime
+  api-gateway:
+    build:
+      dockerfile: Dockerfile.runtime
+  manager-service:
+    build:
+      dockerfile: Dockerfile.runtime
+  fantasy-service:
+    build:
+      dockerfile: Dockerfile.runtime

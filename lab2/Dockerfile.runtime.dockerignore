@@ -1,0 +1,8 @@
+.git
+.idea
+reference
+**/target/classes
+**/target/test-classes
+**/target/maven-*
+**/target/surefire*
+**/*.jar.original

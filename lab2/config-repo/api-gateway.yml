@@ -1,0 +1,28 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: managers
+              uri: lb://manager-service
+              predicates:
+                - Path=/api/v1/managers,/api/v1/managers/**
+            - id: fantasy
+              uri: lb://fantasy-service
+              predicates:
+                - Path=/api/v1/clubs,/api/v1/clubs/**,/api/v1/players,/api/v1/players/**,/api/v1/fantasy-teams,/api/v1/fantasy-teams/**,/api/v1/gameweeks,/api/v1/gameweeks/**,/api/v1/leagues,/api/v1/leagues/**
+            - id: manager-docs
+              uri: lb://manager-service
+              predicates:
+                - Path=/docs/managers
+              filters:
+                - SetPath=/v3/api-docs
+            - id: fantasy-docs
+              uri: lb://fantasy-service
+              predicates:
+                - Path=/docs/fantasy
+              filters:
+                - SetPath=/v3/api-docs
