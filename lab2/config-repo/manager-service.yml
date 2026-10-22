@@ -1,0 +1,11 @@
+server:
+  port: 8081
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://${MANAGER_DB_HOST:localhost}:5432/managers
+    username: ${DB_USER:fantasy}
+    password: ${DB_PASSWORD:fantasy}
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
