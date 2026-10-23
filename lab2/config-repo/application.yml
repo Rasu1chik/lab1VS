@@ -17,3 +17,28 @@ management:
       show-details: always
 api:
   base-path: /api/v1
+spring:
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+      client:
+        config:
+          default:
+            connectTimeout: 1500
+            readTimeout: 2500
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 5
+        minimumNumberOfCalls: 3
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 2
+        ignoreExceptions:
+          - feign.FeignException$FeignClientException
+  timelimiter:
+    configs:
+      default:
+        timeoutDuration: 4s
