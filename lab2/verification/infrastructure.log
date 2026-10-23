@@ -1,0 +1,10 @@
+Eureka registered: API-GATEWAY, CONFIG-SERVER, FANTASY-SERVICE, MANAGER-SERVICE
+Config Server: manager-service OK
+Config Server: fantasy-service OK
+Config Server: api-gateway OK
+Config Server: discovery-server OK
+Gateway OpenAPI: docs/managers OK
+Gateway OpenAPI: docs/fantasy OK
+Gateway internal route: 404 (not exposed)
+Database managers: managers
+Database fantasy: databasechangelog, databasechangeloglock, fantasy_teams, gameweeks, league_teams, leagues, player_performances, players, real_clubs, squad_players, transfers

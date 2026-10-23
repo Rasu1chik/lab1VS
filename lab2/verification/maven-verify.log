@@ -1,0 +1,224 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] fantasy-football-microservices                                     [pom]
+[INFO] discovery-server                                                   [jar]
+[INFO] config-server                                                      [jar]
+[INFO] api-gateway                                                        [jar]
+[INFO] manager-service                                                    [jar]
+[INFO] fantasy-service                                                    [jar]
+[INFO] 
+[INFO] -------------< com.example:fantasy-football-microservices >-------------
+[INFO] Building fantasy-football-microservices 2.0.0                      [1/6]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- spring-boot:3.5.7:repackage (repackage) @ fantasy-football-microservices ---
+[INFO] 
+[INFO] --------------------< com.example:discovery-server >--------------------
+[INFO] Building discovery-server 2.0.0                                    [2/6]
+[INFO]   from discovery-server/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ discovery-server ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ discovery-server ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ discovery-server ---
+[INFO] skip non existing resourceDirectory /workspace/discovery-server/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ discovery-server ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ discovery-server ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ discovery-server ---
+[INFO] 
+[INFO] --- spring-boot:3.5.7:repackage (repackage) @ discovery-server ---
+[INFO] Replacing main artifact /workspace/discovery-server/target/discovery-server-2.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /workspace/discovery-server/target/discovery-server-2.0.0.jar.original
+[INFO] 
+[INFO] ---------------------< com.example:config-server >----------------------
+[INFO] Building config-server 2.0.0                                       [3/6]
+[INFO]   from config-server/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ config-server ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ config-server ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ config-server ---
+[INFO] skip non existing resourceDirectory /workspace/config-server/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ config-server ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ config-server ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ config-server ---
+[INFO] 
+[INFO] --- spring-boot:3.5.7:repackage (repackage) @ config-server ---
+[INFO] Replacing main artifact /workspace/config-server/target/config-server-2.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /workspace/config-server/target/config-server-2.0.0.jar.original
+[INFO] 
+[INFO] ----------------------< com.example:api-gateway >-----------------------
+[INFO] Building api-gateway 2.0.0                                         [4/6]
+[INFO]   from api-gateway/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ api-gateway ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ api-gateway ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ api-gateway ---
+[INFO] skip non existing resourceDirectory /workspace/api-gateway/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ api-gateway ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ api-gateway ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ api-gateway ---
+[INFO] 
+[INFO] --- spring-boot:3.5.7:repackage (repackage) @ api-gateway ---
+[INFO] Replacing main artifact /workspace/api-gateway/target/api-gateway-2.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /workspace/api-gateway/target/api-gateway-2.0.0.jar.original
+[INFO] 
+[INFO] --------------------< com.example:manager-service >---------------------
+[INFO] Building manager-service 2.0.0                                     [5/6]
+[INFO]   from manager-service/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ manager-service ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ manager-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 8 source files with javac [debug parameters release 21] to target/classes
+[INFO] Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ manager-service ---
+[INFO] skip non existing resourceDirectory /workspace/manager-service/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ manager-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 21] to target/test-classes
+[INFO] Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ manager-service ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.example.managerservice.ManagerControllerTest
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (/root/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.492 s -- in com.example.managerservice.ManagerControllerTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ manager-service ---
+[INFO] Building jar: /workspace/manager-service/target/manager-service-2.0.0.jar
+[INFO] 
+[INFO] --- spring-boot:3.5.7:repackage (repackage) @ manager-service ---
+[INFO] Replacing main artifact /workspace/manager-service/target/manager-service-2.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /workspace/manager-service/target/manager-service-2.0.0.jar.original
+[INFO] 
+[INFO] --------------------< com.example:fantasy-service >---------------------
+[INFO] Building fantasy-service 2.0.0                                     [6/6]
+[INFO]   from fantasy-service/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ fantasy-service ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 6 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ fantasy-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ fantasy-service ---
+[INFO] skip non existing resourceDirectory /workspace/fantasy-service/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ fantasy-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ fantasy-service ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.example.fantasy.SquadValidatorTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.034 s -- in com.example.fantasy.SquadValidatorTest
+[INFO] Running com.example.fantasy.ManagerFallbackTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.042 s -- in com.example.fantasy.ManagerFallbackTest
+[INFO] Running com.example.fantasy.ReactiveControllerTest
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (/root/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.401 s -- in com.example.fantasy.ReactiveControllerTest
+[INFO] Running com.example.fantasy.PointsCalculatorTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.example.fantasy.PointsCalculatorTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ fantasy-service ---
+[INFO] 
+[INFO] --- spring-boot:3.5.7:repackage (repackage) @ fantasy-service ---
+[INFO] Replacing main artifact /workspace/fantasy-service/target/fantasy-service-2.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /workspace/fantasy-service/target/fantasy-service-2.0.0.jar.original
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for fantasy-football-microservices 2.0.0:
+[INFO] 
+[INFO] fantasy-football-microservices ..................... SUCCESS [  0.124 s]
+[INFO] discovery-server ................................... SUCCESS [  0.325 s]
+[INFO] config-server ...................................... SUCCESS [  0.041 s]
+[INFO] api-gateway ........................................ SUCCESS [  0.042 s]
+[INFO] manager-service .................................... SUCCESS [  1.450 s]
+[INFO] fantasy-service .................................... SUCCESS [  0.754 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.849 s
+[INFO] Finished at: 2026-10-22T15:42:43Z
+[INFO] ------------------------------------------------------------------------

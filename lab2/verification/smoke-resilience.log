@@ -1,0 +1,19 @@
+PASS: R2DBC manager CRUD, validation, unique constraints; catalog search and pagination
+PASS: Feign manager lookup, missing manager 404, team validation, transfers and rollback
+PASS: leagues, captain double points, all 51 teams scored, repeated finish rejected, reverse Feign reference check
+ Container fantasy-lab2-manager-service-1 Stopping 
+ Container fantasy-lab2-manager-service-1 Stopped 
+PASS: actual Feign Circuit Breaker is OPEN
+PASS: manager outage -> HTTP 503, no fake manager; independent reads remain available
+ Container fantasy-lab2-config-server-1 Waiting 
+ Container fantasy-lab2-config-server-1 Healthy 
+ Container fantasy-lab2-manager-db-1 Waiting 
+ Container fantasy-lab2-config-server-1 Waiting 
+ Container fantasy-lab2-discovery-server-1 Waiting 
+ Container fantasy-lab2-manager-db-1 Healthy 
+ Container fantasy-lab2-discovery-server-1 Healthy 
+ Container fantasy-lab2-config-server-1 Healthy 
+ Container fantasy-lab2-manager-service-1 Starting 
+ Container fantasy-lab2-manager-service-1 Started 
+PASS: Feign circuit recovered to CLOSED after manager-service restart
+ALL END-TO-END CHECKS PASSED
